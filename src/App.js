@@ -34,7 +34,10 @@ function App() {
   const [currency, setCurrency] = useState("");
   const [result, setResult] = useState(0);
 
-  const createResult = () => {};
+  const createResult = () => {
+    let finalResult;
+    setResult(finalResult);
+  };
   return (
     <div className="App">
       <div className="container">
@@ -43,7 +46,7 @@ function App() {
           <Input inputValue={inputValue} setInputValue={setInputValue} />
           <Select currency={currency} setCurrency={setCurrency} />
           <Button onClick={createResult} />
-          <Result result={result} setResult={setResult} />
+          <Result result={result} />
         </div>
       </div>
     </div>
