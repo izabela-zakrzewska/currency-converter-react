@@ -5,7 +5,37 @@ import Input from "./components/Input";
 import Select from "./components/Select";
 import Button from "./components/Button";
 import Result from "./components/Result";
-//import Axios from "axios";
+import axios from "axios";
+
+function App() {
+  const [inputValue, setInputValue] = useState(0);
+  const [currency, setCurrency] = useState(0);
+  const [result, setResult] = useState(0);
+
+  const createResult = async () => {
+    if (currency) {
+      const apiUrl = `https://api.nbp.pl/api/exchangerates/rates/a/${currency}`;
+      let dataFromAxios = 3.3;
+      let finalResult = inputValue * dataFromAxios;
+      setResult(finalResult);
+    }
+  };
+  return (
+    <div className="App">
+      <div className="container">
+        <h1>Przelicznik walut</h1>
+        <div className="outerForm">
+          <Input inputValue={inputValue} setInputValue={setInputValue} />
+          <Select currency={currency} setCurrency={setCurrency} />
+          <Button onClick={createResult} />
+          <Result result={result} />
+        </div>
+      </div>
+    </div>
+  );
+}
+
+export default App;
 
 /* let getData = async () => {
   let responseEUR = await axios.get(
@@ -25,32 +55,4 @@ import Result from "./components/Result";
   } else if (optionCHF) {
     finalAmount = amountFromInput.value * responseCHF.data.rates[9].mid;
   }
-
-
-document.querySelector("#button").addEventListener("click", getData); */
-
-function App() {
-  const [inputValue, setInputValue] = useState(0);
-  const [currency, setCurrency] = useState("");
-  const [result, setResult] = useState(0);
-
-  const createResult = () => {
-    let finalResult;
-    setResult(finalResult);
-  };
-  return (
-    <div className="App">
-      <div className="container">
-        <h1>Przelicznik walut</h1>
-        <div className="outerForm">
-          <Input inputValue={inputValue} setInputValue={setInputValue} />
-          <Select currency={currency} setCurrency={setCurrency} />
-          <Button onClick={createResult} />
-          <Result result={result} />
-        </div>
-      </div>
-    </div>
-  );
-}
-
-export default App;
+ */

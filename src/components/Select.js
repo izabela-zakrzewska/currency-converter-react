@@ -7,7 +7,7 @@ const Select = ({ currency, setCurrency }) => {
       onChange={(event) => setCurrency(event.target.value)}
       className="item"
       id="select">
-      <option disabled selected>
+      <option disabled value="0">
         Wybierz walutę
       </option>
 
