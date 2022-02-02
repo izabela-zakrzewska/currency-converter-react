@@ -8,16 +8,19 @@ import Result from "./components/Result";
 import axios from "axios";
 
 function App() {
-  const [inputValue, setInputValue] = useState(0);
+  const [inputValue, setInputValue] = useState("");
   const [currency, setCurrency] = useState(0);
   const [result, setResult] = useState(0);
 
   const createResult = async () => {
     if (currency) {
-      const apiUrl = `https://api.nbp.pl/api/exchangerates/rates/a/${currency}`;
-      let dataFromAxios = 3.3;
+      const response = await axios.get(
+        `https://api.nbp.pl/api/exchangerates/rates/a/${currency}`
+      );
+      console.log(response);
+      let dataFromAxios = response.data.rates[0].mid;
       let finalResult = inputValue * dataFromAxios;
-      setResult(finalResult);
+      setResult(finalResult.toFixed(2));
     }
   };
   return (
@@ -36,23 +39,3 @@ function App() {
 }
 
 export default App;
-
-/* let getData = async () => {
-  let responseEUR = await axios.get(
-    "https://api.nbp.pl/api/exchangerates/rates/a/eur/"
-  );
-  let responseUSD = await axios.get(
-    "https://api.nbp.pl/api/exchangerates/rates/a/usd/"
-  );
-  let responseCHF = await axios.get(
-    "https://api.nbp.pl/api/exchangerates/rates/a/chf/"
-  );
-
-  if (optionEUR) {
-    finalAmount = amountFromInput.value * responseEUR.data.rates[0].mid;
-  } else if (optionUSD) {
-    finalAmount = amountFromInput.value * responseUSD.data.rates[0].mid;
-  } else if (optionCHF) {
-    finalAmount = amountFromInput.value * responseCHF.data.rates[9].mid;
-  }
- */
